@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./LoginSignUp.css";
- import {HiOutlineMail} from "react-icons/hi";
-import {BiLockOpenAlt} from "react-icons/bi";
-import { CiFaceSmile} from "react-icons/ci";
+import { HiOutlineMail } from "react-icons/hi";
+import { BiLockOpenAlt } from "react-icons/bi";
+import { CiFaceSmile } from "react-icons/ci";
 import { BsPhone } from "react-icons/bs";
 import profile from '../image/Profile.png'
 
@@ -19,7 +19,7 @@ import {
 
 function LoginSignup() {
     const dispatch = useDispatch();
-     //const alert = useAlert();
+    //const alert = useAlert();
     const navigate = useNavigate();
 
     const { error, loading, isAuthenticated, user: isLogin } = useSelector(
@@ -40,7 +40,7 @@ function LoginSignup() {
     });
 
     const { name, email, phone, password } = user;
-    console.log(user,"jjjjjjjjj");
+    console.log(user, "jjjjjjjjj");
     const [avatar, setAvatar] = useState("https://res.cloudinary.com/doya08pdl/image/upload/v1661379244/avatars/eulivilfagoufudqjc9q.png")
     const [avatarPreview, setAvatarPreview] = useState(profile);
 
@@ -57,7 +57,7 @@ function LoginSignup() {
         myForm.set("password", password);
         myForm.set("avatar", avatar);
 
-        console.log(myForm,"kkkkkkk");
+        console.log(myForm, "kkkkkkk");
         dispatch(register(myForm));
         navigate("/user/verify/phone");
     };
@@ -84,27 +84,26 @@ function LoginSignup() {
 
     useEffect(() => {
         if (error) {
-          //alert.error(error.message);
+            //alert.error(error.message);
             dispatch(clearErrors());
         }
 
 
 
-        if (isLogin && isLogin.role === 'admin' && isLogin.power === 'Hero') {
+
+
+        if (isLogin && isLogin.role === 'admin') {
             navigate('/admin/dashboard')
-        } else if (isLogin && isLogin.role === 'admin' && isLogin.power === null) {
-            navigate('/admin/products')
-        } else if (isLogin && isLogin.role === 'user' && isLogin.power === null) {
+        } else if (isLogin && isLogin.role === 'user') {
             navigate("/product");
         }
-
 
 
 
     }, [dispatch, error, alert, navigate, isAuthenticated]);
 
 
-   
+
     const switchTabs = (e, tab) => {
         if (tab === "login") {
             switcherTab.current.classList.add("shiftToNeutral");
@@ -123,31 +122,31 @@ function LoginSignup() {
         }
     };
     return (
-   
+
         <>
 
             <div className="container LoginSignUpContainer bg-orange-50">
- 
+
                 <div className="LoginSignUpBox xs:mt-[50px] md:mt-0 lg:mt-0  ">
                     <div className="bg-yellow-900 text-white">
                         <div className="Login_signUp_toggle flex flex-row justify-center   ">
                             <p className="mt-5" onClick={(e) => switchTabs(e, "login")}>LOGIN</p>
-                            <p className="ml-12 mt-5 "onClick={(e) => switchTabs(e, "register")}>REGISTER</p>
+                            <p className="ml-12 mt-5 " onClick={(e) => switchTabs(e, "register")}>REGISTER</p>
                         </div>
-                        <button className=""  ref={switcherTab}></button>
+                        <button className="" ref={switcherTab}></button>
                     </div>
                     <form
                         action=""
                         className="loginForm mt-10  "
-                         ref={loginTab}
+                        ref={loginTab}
                         onSubmit={loginSubmit}
-                     >
+                    >
                         <div className="loginEmail">
                             <HiOutlineMail />
                             <input
                                 type="email"
                                 placeholder="Email"
-                               value={loginEmail}
+                                value={loginEmail}
                                 onChange={(e) => setLoginEmail(e.target.value)}
                             />
                         </div>
@@ -163,7 +162,7 @@ function LoginSignup() {
                         <div className="flex justify-center text-md text-gray-500">
                             <Link className="" to="/password/forgot">Forget Password ?</Link>
                         </div>
-                        
+
                         <input type="submit" value="Login" className="loginBtn " />
                     </form>
                     <form
@@ -181,7 +180,7 @@ function LoginSignup() {
 
                                 name="name"
                                 value={name}
-                               onChange={registerDataChange}
+                                onChange={registerDataChange}
                             />
                         </div>
                         <div className="signUpEmail m-2">
@@ -226,8 +225,8 @@ function LoginSignup() {
                                 onChange={registerDataChange}
                             />
                         </div>
-                        <input type="submit" value="Register" className="signUpBtn "/>
-                            {/* disabled={loading ? true : false} /> */}
+                        <input type="submit" value="Register" className="signUpBtn " />
+                        {/* disabled={loading ? true : false} /> */}
                         {/* //disabled = {loading ? true : false} */}
                     </form>
 
@@ -235,8 +234,8 @@ function LoginSignup() {
 
             </div>
         </>
-        
-    
+
+
     );
 
 }
